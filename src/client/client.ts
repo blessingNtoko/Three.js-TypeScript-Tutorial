@@ -42,9 +42,21 @@ window.addEventListener('resize', () => {
 const stats = Stats();
 document.body.appendChild(stats.dom);
 
+const gui = new GUI();
+const cubeFolder = gui.addFolder("Cube");
+const cameraFolder = gui.addFolder("Camera");
+cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2);
+cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2);
+cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2);
+cubeFolder.open();
+cameraFolder.add(camera.position, "x", -20, 20);
+cameraFolder.add(camera.position, "y", -20, 20);
+cameraFolder.add(camera.position, "z", 0, 20);
+cameraFolder.open();
+
 function animate() {
-    cube.rotation.x += .02;
-    cube.rotation.y += .02;
+    // cube.rotation.x += .02;
+    // cube.rotation.y += .02;
 
     render();
     requestAnimationFrame(animate);
