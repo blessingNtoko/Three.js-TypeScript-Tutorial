@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import Stats from 'three/examples/jsm/libs/stats.module';
+import { GUI } from 'dat.gui';
 
 // a scene is a tree like structure of Meshes, Lights, Groups, 3D Positions, Cameras(optional)
 const scene = new THREE.Scene();
@@ -19,7 +21,8 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-new OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+// controls.addEventListener('change', render);
 
 const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial({
@@ -36,12 +39,16 @@ window.addEventListener('resize', () => {
     render();
 });
 
+const stats = Stats();
+document.body.appendChild(stats.dom);
+
 function animate() {
-    cube.rotation.x += .01;
-    cube.rotation.y += .01;
+    cube.rotation.x += .02;
+    cube.rotation.y += .02;
 
     render();
     requestAnimationFrame(animate);
+    stats.update();
 }
 
 function render() {
@@ -49,3 +56,4 @@ function render() {
 }
 
 animate();
+// render();
