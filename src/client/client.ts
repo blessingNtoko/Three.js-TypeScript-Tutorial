@@ -4,10 +4,10 @@ import Stats from "three/examples/jsm/libs/stats.module";
 import { GUI } from "dat.gui";
 
 // a scene is a tree like structure of Meshes, Lights, Groups, 3D Positions, Cameras(optional)
-const scene = new THREE.Scene();
+const scene: THREE.Scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5));
 // a camera describes the view boundaries of the scene within the Frustum dimensions
-const camera = new THREE.PerspectiveCamera(
+const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
@@ -16,44 +16,44 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 3;
 
 // Renderer takes all the data from the scene and camera and puts it on as HTML canvas
-const renderer = new THREE.WebGLRenderer({
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({
   antialias: true,
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls: OrbitControls = new OrbitControls(camera, renderer.domElement);
 
-const boxGeometry = new THREE.BoxGeometry();
-const sphereGeometry = new THREE.SphereGeometry();
-const icosahedronGeometry = new THREE.IcosahedronGeometry(1, 0);
-const planeGeometry = new THREE.PlaneGeometry();
-const torusKnotGeometry = new THREE.TorusKnotGeometry();
+const boxGeometry: THREE.BoxGeometry = new THREE.BoxGeometry();
+const sphereGeometry: THREE.SphereGeometry = new THREE.SphereGeometry();
+const icosahedronGeometry: THREE.IcosahedronGeometry = new THREE.IcosahedronGeometry(1, 0);
+const planeGeometry: THREE.PlaneGeometry = new THREE.PlaneGeometry();
+const torusKnotGeometry: THREE.TorusKnotGeometry = new THREE.TorusKnotGeometry();
 
-const material = new THREE.MeshBasicMaterial({
+const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({
   color: 0x00ff00,
 //   wireframe: false,
   wireframe: true,
 });
-// const material = new THREE.MeshNormalMaterial();
+// const material: THREE.MeshBasicMaterial = new THREE.MeshNormalMaterial();
 
-const cube = new THREE.Mesh(boxGeometry, material);
+const cube: THREE.Mesh = new THREE.Mesh(boxGeometry, material);
 cube.position.x = 5;
 scene.add(cube);
 
-const sphere = new THREE.Mesh(sphereGeometry, material);
+const sphere: THREE.Mesh = new THREE.Mesh(sphereGeometry, material);
 sphere.position.x = 3;
 scene.add(sphere);
 
-const icosahedron = new THREE.Mesh(icosahedronGeometry, material);
+const icosahedron: THREE.Mesh = new THREE.Mesh(icosahedronGeometry, material);
 icosahedron.position.x = 0;
 scene.add(icosahedron);
 
-const plane = new THREE.Mesh(planeGeometry, material);
+const plane: THREE.Mesh = new THREE.Mesh(planeGeometry, material);
 plane.position.x = -2;
 scene.add(plane);
 
-const torusKnot = new THREE.Mesh(torusKnotGeometry, material);
+const torusKnot: THREE.Mesh = new THREE.Mesh(torusKnotGeometry, material);
 torusKnot.position.x = -5;
 scene.add(torusKnot);
 
@@ -64,7 +64,7 @@ window.addEventListener("resize", () => {
   render();
 });
 
-const stats = Stats();
+const stats: Stats = Stats();
 document.body.appendChild(stats.dom);
 
 // const options = {
@@ -75,8 +75,8 @@ document.body.appendChild(stats.dom);
 //     }
 // }
 
-const gui = new GUI();
-const materialFolder = gui.addFolder("THREE.Material");
+const gui: GUI = new GUI();
+const materialFolder: GUI = gui.addFolder("THREE.Material");
 // materialFolder.add(material, "transparent").onChange(() => material.needsUpdate = true);
 // materialFolder.add(material, "opacity", 0, 1, .01);
 // materialFolder.add(material, "depthTest");
@@ -86,19 +86,19 @@ const materialFolder = gui.addFolder("THREE.Material");
 // materialFolder.add(material, "side", options.side).onChange(() => updateMaterial());
 materialFolder.open();
 
-function updateMaterial() {
+function updateMaterial(): void {
     material.side = Number(material.side);
     material.needsUpdate = true;
 }
 
-function animate() {
+function animate(): void {
   //   controls.update();
   render();
   stats.update();
   requestAnimationFrame(animate);
 }
 
-function render() {
+function render(): void {
   renderer.render(scene, camera);
 }
 
