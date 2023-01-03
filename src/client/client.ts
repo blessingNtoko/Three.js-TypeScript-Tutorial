@@ -5,6 +5,7 @@ import { GUI } from 'dat.gui';
 
 // a scene is a tree like structure of Meshes, Lights, Groups, 3D Positions, Cameras(optional)
 const scene = new THREE.Scene();
+scene.add(new THREE.AxesHelper(1));
 // a camera describes the view boundaries of the scene within the Frustum dimensions
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -44,15 +45,23 @@ document.body.appendChild(stats.dom);
 
 const gui = new GUI();
 const cubeFolder = gui.addFolder("Cube");
-const cameraFolder = gui.addFolder("Camera");
-cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2);
-cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2);
-cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2);
+const cubeRotationFolder = gui.addFolder("Rotation");
+const cubePositionFolder = gui.addFolder("Position");
+const cubeScaleFolder = gui.addFolder("Scale");
+cubeFolder.add(cube, "visible");
+cubeRotationFolder.add(cube.rotation, "x", 0, Math.PI * 2);
+cubeRotationFolder.add(cube.rotation, "y", 0, Math.PI * 2);
+cubeRotationFolder.add(cube.rotation, "z", 0, Math.PI * 2);
+cubePositionFolder.add(cube.position, "x", -10, 10, 2);
+cubePositionFolder.add(cube.position, "y", -10, 10, 2);
+cubePositionFolder.add(cube.position, "z", -10, 10, 2);
+cubeScaleFolder.add(cube.scale, "x", -5, 5, 2);
+cubeScaleFolder.add(cube.scale, "y", -5, 5, 2);
+cubeScaleFolder.add(cube.scale, "z", -5, 5, 2);
 cubeFolder.open();
-cameraFolder.add(camera.position, "x", -20, 20);
-cameraFolder.add(camera.position, "y", -20, 20);
-cameraFolder.add(camera.position, "z", 0, 20);
-cameraFolder.open();
+cubeRotationFolder.open();
+cubePositionFolder.open();
+cubeScaleFolder.open();
 
 function animate() {
     // cube.rotation.x += .02;
