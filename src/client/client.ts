@@ -6,6 +6,10 @@ import { GUI } from 'dat.gui'
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
 
+const light = new THREE.PointLight(0xffffff, 2)
+light.position.set(10, 10, 10)
+scene.add(light)
+
 const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -26,12 +30,12 @@ const icosahedronGeometry = new THREE.IcosahedronGeometry(1, 0)
 const planeGeometry = new THREE.PlaneGeometry()
 const torusKnotGeometry = new THREE.TorusKnotGeometry()
 
-const material = new THREE.MeshBasicMaterial() //{ color: 0x00ff00, wireframe: true })
+const material = new THREE.MeshPhongMaterial()
 
-// const texture = new THREE.TextureLoader().load("img/grid.png")
-// material.map = texture
+const texture = new THREE.TextureLoader().load("img/grid.png")
+material.map = texture
 const envTexture = new THREE.CubeTextureLoader().load(["img/px_50.png", "img/nx_50.png", "img/py_50.png", "img/ny_50.png", "img/pz_50.png", "img/nz_50.png"])
-// envTexture.mapping = THREE.CubeReflectionMapping
+// //envTexture.mapping = THREE.CubeReflectionMapping
 envTexture.mapping = THREE.CubeRefractionMapping
 material.envMap = envTexture
 
@@ -96,16 +100,32 @@ materialFolder.open()
 
 const data = {
     color: material.color.getHex(),
+    emissive: material.emissive.getHex(),
+    specular: material.specular.getHex()
 }
 
-const meshBasicMaterialFolder = gui.addFolder('THREE.MeshBasicMaterial')
-meshBasicMaterialFolder.addColor(data, 'color').onChange(() => { material.color.setHex(Number(data.color.toString().replace('#', '0x'))) })
-meshBasicMaterialFolder.add(material, 'wireframe')
-// meshBasicMaterialFolder.add(material, 'wireframeLinewidth', 0, 10)
-meshBasicMaterialFolder.add(material, 'combine', options.combine).onChange(() => updateMaterial())
-meshBasicMaterialFolder.add(material, 'reflectivity', 0, 1)
-meshBasicMaterialFolder.add(material, 'refractionRatio', 0, 1)
-meshBasicMaterialFolder.open()
+const meshPhongMaterialFolder = gui.addFolder('THREE.MeshPhongMaterial')
+meshPhongMaterialFolder.addColor(data, 'color').onChange(() => {
+    material.color.setHex(Number(data.color.toString().replace('#', '0x')))
+})
+meshPhongMaterialFolder.addColor(data, 'emissive').onChange(() => {
+    material.emissive.setHex(
+        Number(data.emissive.toString().replace('#', '0x'))
+    )
+})
+meshPhongMaterialFolder.addColor(data, 'specular').onChange(() => { material.specular.setHex(Number(data.specular.toString().replace('#', '0x'))) });
+meshPhongMaterialFolder.add(material, 'shininess', 0, 1024);
+meshPhongMaterialFolder.add(material, 'wireframe')
+meshPhongMaterialFolder.add(material, 'wireframeLinewidth', 0, 10)
+meshPhongMaterialFolder
+    .add(material, 'flatShading')
+    .onChange(() => updateMaterial())
+meshPhongMaterialFolder
+    .add(material, 'combine', options.combine)
+    .onChange(() => updateMaterial())
+meshPhongMaterialFolder.add(material, 'reflectivity', 0, 1)
+meshPhongMaterialFolder.add(material, 'refractionRatio', 0, 1)
+meshPhongMaterialFolder.open()
 
 function updateMaterial() {
     material.side = Number(material.side)
