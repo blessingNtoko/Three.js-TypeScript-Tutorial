@@ -23,11 +23,11 @@ const controls = new OrbitControls(camera, renderer.domElement)
 controls.target.set(.5, .5, .5)
 // controls.update() 
 
-controls.addEventListener('change', () => console.log("Controls Change"))
-controls.addEventListener('start', () => console.log("Controls Start Event"))
-controls.addEventListener('end', () => console.log("Controls End Event"))
-controls.autoRotate = true
-controls.autoRotateSpeed = 10
+// controls.addEventListener('change', () => console.log("Controls Change"))
+// controls.addEventListener('start', () => console.log("Controls Start Event"))
+// controls.addEventListener('end', () => console.log("Controls End Event"))
+// controls.autoRotate = true
+// controls.autoRotateSpeed = 10
 controls.enableDamping = true
 controls.dampingFactor = .01
 // controls.enableKeys = true //older versions
@@ -38,15 +38,15 @@ controls.keys = {
     RIGHT: "ArrowRight", // right arrow
     BOTTOM: "ArrowDown" // down arrow
 }
-controls.mouseButtons = {
-    LEFT: THREE.MOUSE.ROTATE,
-    MIDDLE: THREE.MOUSE.DOLLY,
-    RIGHT: THREE.MOUSE.PAN
-}
-controls.touches = {
-    ONE: THREE.TOUCH.ROTATE,
-    TWO: THREE.TOUCH.DOLLY_PAN
-}
+// controls.mouseButtons = {
+//     LEFT: THREE.MOUSE.ROTATE,
+//     MIDDLE: THREE.MOUSE.DOLLY,
+//     RIGHT: THREE.MOUSE.PAN
+// }
+// controls.touches = {
+//     ONE: THREE.TOUCH.ROTATE,
+//     TWO: THREE.TOUCH.DOLLY_PAN
+// }
 controls.screenSpacePanning = true
 controls.minAzimuthAngle = 0
 controls.maxAzimuthAngle = Math.PI / 2
