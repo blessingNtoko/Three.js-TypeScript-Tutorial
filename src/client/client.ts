@@ -50,7 +50,7 @@ for (let i = 0; i < 100; i++) {
     Math.random() * 4
   );
   const mat = new THREE.MeshBasicMaterial({ wireframe: true });
-  switch (i % 3) {
+  switch (i % 4) {
     case 0:
       mat.color = new THREE.Color(0xff0000);
       break;
@@ -59,6 +59,9 @@ for (let i = 0; i < 100; i++) {
       break;
     case 2:
       mat.color = new THREE.Color(0x0000ff);
+      break;
+    case 3:
+      mat.color = new THREE.Color(0xff00ff);
       break;
     default:
       break;
