@@ -19,7 +19,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const menuPanel = document.getElementById("menuPanel") as HTMLDivElement;
-const startBtn = document.getElementById("startButton") as HTMLInputElement;
+const startBtn = document.getElementById("startButton") as HTMLInputElement; 
 startBtn.addEventListener(
   "click",
   function () {
