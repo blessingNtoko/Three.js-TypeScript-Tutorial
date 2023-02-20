@@ -32,23 +32,26 @@ const material = [
     new THREE.MeshPhongMaterial({ color: 0x0000ff, transparent: true })
 ]
 
-const cubes = [
-    new THREE.Mesh(geometry, material[0]),
-    new THREE.Mesh(geometry, material[1]),
-    new THREE.Mesh(geometry, material[2])
-]
+// const cubes = [
+//     new THREE.Mesh(geometry, material[0]),
+//     new THREE.Mesh(geometry, material[1]),
+//     new THREE.Mesh(geometry, material[2])
+// ]
+const cubes = Array(3).fill(0).map((el, index) => new THREE.Mesh(geometry, material[index]));
+console.log(cubes);
+
 cubes[0].position.x = -2
 cubes[1].position.x = 0
 cubes[2].position.x = 2
 cubes.forEach((c) => scene.add(c))
 
 const controls = new DragControls(cubes, camera, renderer.domElement)
-// controls.addEventListener('dragstart', function (event) {
-//     event.object.material.opacity = 0.33
-// })
-// controls.addEventListener('dragend', function (event) {
-//     event.object.material.opacity = 1
-// })
+controls.addEventListener('dragstart', function (event) {
+    event.object.material.opacity = 0.33
+});
+controls.addEventListener('dragend', function (event) {
+    event.object.material.opacity = 1
+});
 
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
