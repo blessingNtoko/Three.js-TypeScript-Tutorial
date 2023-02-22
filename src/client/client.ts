@@ -44,7 +44,7 @@ for (let i = -3, j = 0; i <= 3; i += 3, j++) {
           (child as THREE.Mesh).material = material;
         }
       });
-      
+
       scene.add(object);
     },
     (xhr) => {
@@ -76,20 +76,6 @@ for (let i = -3, j = 0; i <= 3; i += 3, j++) {
 //     //     (child as THREE.Mesh).material = material;
 //     //   }
 //     // });
-//     scene.add(object);
-//   },
-//   (xhr) => {
-//     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-//   },
-//   (error) => {
-//     console.log(error);
-//   }
-// );
-// objLoader.load(
-//   "models/cube.obj",
-//   (object) => {
-//     console.log("Cube Object :: ", object);
-//     object.position.x = 3;
 //     scene.add(object);
 //   },
 //   (xhr) => {
